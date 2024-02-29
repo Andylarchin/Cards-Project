@@ -54,12 +54,12 @@ const loginBody = () => {
   }, []);
 
   useEffect(() => {
-    const result = USER_REGEX.test(user);
+    const result = user;
     setValidName(result);
   }, [user]);
 
   useEffect(() => {
-    const result = PWD_REGEX.test(password);
+    const result = password;
     setValidPassword(result);
     const match = password === matchpwd;
     setValidMatch(match);
@@ -69,28 +69,48 @@ const loginBody = () => {
     setErrMsg('');
   }, [user, password, matchpwd]);
 
-  const items = { ...localStorage };
-  console.log(JSON.parse(items));
-
   const handleSubmit = async (e) => {
     const userId = uniqueId();
 
-    const userAccount = [
-      (id = userId),
-      (username = user),
-      (password = password),
-    ];
-
-    localStorage.setItem(`${userId}`, JSON.stringify(userAccount));
     e.preventDefault();
+
+    console.log(`Username : ${user}`);
+    console.log(`Password : ${password}`);
+
+    const url = 'https://api.escuelajs.co/api/v1/users/';
+    const data = {
+      name: 'defaultUser',
+      email: `${user}`,
+      password: `${password}`,
+      avatar: 'https://picsum.photos/800',
+    };
+
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error('Network response was not ok.');
+      })
+      .then((data) => {
+        console.log('Login successful:', data);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+
     document.getElementById('username').value = '';
     document.getElementById('password').value = '';
     setPasswordFocus(false);
     setUserFocus(false);
     setValidPassword(false);
     setValidName(false);
-    console.log(`Username : ${user}`);
-    console.log(`Password : ${password}`);
   };
 
   return (

@@ -6,7 +6,7 @@ const AdminPage = () => {
     const url = 'https://api.escuelajs.co/api/v1/users/';
     const data = {
       name: 'Andyz',
-      email: 'andylarchin',
+      email: 'andylarchin123@gmail.com',
       password: 'andylarchin',
       avatar: 'https://picsum.photos/800',
       role: 'admin',

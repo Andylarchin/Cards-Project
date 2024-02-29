@@ -53,15 +53,13 @@ const Login = () => {
     );
   };
 
-  console.log(uniqueId());
-
   useEffect(() => {
-    const result = USER_REGEX.test(user);
+    const result = user;
     setValidName(result);
   }, [user]);
 
   useEffect(() => {
-    const result = PWD_REGEX.test(password);
+    const result = password;
     setValidPassword(result);
     const match = password === matchpwd;
     setValidMatch(match);
@@ -73,8 +71,37 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    document.getElementById('username').value = '';
-    document.getElementById('password').value = '';
+
+    console.log(`Username : ${user}`);
+    console.log(`Password : ${password}`);
+
+    console.log(user, password);
+    const url = 'https://api.escuelajs.co/api/v1/auth/login';
+    const data = {
+      email: `${user}`,
+      password: `${password}`,
+    };
+
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error('Network response was not ok.');
+      })
+      .then((data) => {
+        console.log('Login successful:', data);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+
     setPasswordFocus(false);
     setUserFocus(false);
     setValidPassword(false);

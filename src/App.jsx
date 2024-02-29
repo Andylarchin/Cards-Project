@@ -16,11 +16,6 @@ function App() {
 
   const { data: PostsData, error, isLoading } = useQuery('posts', getPost);
 
-  const getUser = async () => {
-    const res = await fetch('https://jsonplaceholder.typicode.com/users');
-    return res.json();
-  };
-
   const {
     data: UserData,
     error: userError,
@@ -70,8 +65,8 @@ function App() {
         />
       </div> */}
       {/* <LoginBody /> */}
-      <AdminPage />
-      {/* <Login /> */}
+      {/* <AdminPage /> */}
+      <Login />
     </>
   );
 }
