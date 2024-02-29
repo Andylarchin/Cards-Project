@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import Card from './components/Card/Card';
 import LoginBody from './components/LoginForm/loginBody';
 import Login from './components/actualLoginForm/login';
+import AdminPage from './components/adminPage/AdminPage';
 
 const queryClient = new QueryClient();
 
@@ -68,7 +69,8 @@ function App() {
           commentData={commentData}
         />
       </div> */}
-      <LoginBody />
+      {/* <LoginBody /> */}
+      <AdminPage />
       {/* <Login /> */}
     </>
   );
