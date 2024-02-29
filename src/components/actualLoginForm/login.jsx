@@ -33,6 +33,28 @@ const Login = () => {
     userRef.current.focus();
   }, []);
 
+  const uniqueId = () => {
+    const S4 = function () {
+      return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+    };
+    return (
+      S4() +
+      S4() +
+      '-' +
+      S4() +
+      '-' +
+      S4() +
+      '-' +
+      S4() +
+      '-' +
+      S4() +
+      S4() +
+      S4()
+    );
+  };
+
+  console.log(uniqueId());
+
   useEffect(() => {
     const result = USER_REGEX.test(user);
     setValidName(result);

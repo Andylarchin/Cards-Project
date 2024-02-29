@@ -26,6 +26,26 @@ const loginBody = () => {
   const [errMsg, setErrMsg] = useState('');
   const [sucess, setSuccess] = useState(false);
 
+  const uniqueId = () => {
+    const S4 = function () {
+      return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+    };
+    return (
+      S4() +
+      S4() +
+      '-' +
+      S4() +
+      '-' +
+      S4() +
+      '-' +
+      S4() +
+      '-' +
+      S4() +
+      S4() +
+      S4()
+    );
+  };
+
   const USER_REGEX = /^[a-zA-z][a-xA-X0-9-_]{3,23}$/;
   const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
@@ -49,7 +69,19 @@ const loginBody = () => {
     setErrMsg('');
   }, [user, password, matchpwd]);
 
+  const items = { ...localStorage };
+  console.log(JSON.parse(items));
+
   const handleSubmit = async (e) => {
+    const userId = uniqueId();
+
+    const userAccount = [
+      (id = userId),
+      (username = user),
+      (password = password),
+    ];
+
+    localStorage.setItem(`${userId}`, JSON.stringify(userAccount));
     e.preventDefault();
     document.getElementById('username').value = '';
     document.getElementById('password').value = '';
