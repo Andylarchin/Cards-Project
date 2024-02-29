@@ -7,7 +7,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './style.css';
 
-const loginBody = () => {
+const Login = () => {
   const userRef = useRef();
   const errRef = useRef();
 
@@ -70,20 +70,10 @@ const loginBody = () => {
       >
         {errMsg}
       </p>
-      <h1>Register</h1>
+      <h1>Login</h1>
 
       <form onSubmit={handleSubmit}>
-        <label htmlFor='username'>
-          Username:
-          <FontAwesomeIcon
-            icon={faCheck}
-            className={validName ? 'valid' : 'hide'}
-          />
-          <FontAwesomeIcon
-            icon={faTimes}
-            className={validName || !user ? 'hide' : 'invalid'}
-          />
-        </label>
+        <label htmlFor='username'>Username:</label>
         <input
           type='text'
           id='username'
@@ -96,32 +86,7 @@ const loginBody = () => {
           onFocus={() => setUserFocus(true)}
           onBlur={() => setUserFocus(false)}
         />
-
-        <p
-          id='uidnote'
-          className={
-            userFocus && user && !validName ? 'instructions' : 'offscreen'
-          }
-        >
-          <FontAwesomeIcon icon={faInfoCircle} />
-          4 to 24 characters.
-          <br />
-          Must begin with a letter.
-          <br />
-          Letters, numbers, underscores, hyphens allowed.
-        </p>
-
-        <label htmlFor='password'>
-          Password:
-          <FontAwesomeIcon
-            icon={faCheck}
-            className={validPassword ? 'valid' : 'hide'}
-          />
-          <FontAwesomeIcon
-            icon={faTimes}
-            className={validPassword || !password ? 'hide' : 'invalid'}
-          />
-        </label>
+        <label htmlFor='password'>Password:</label>
         <input
           type='password'
           id='password'
@@ -134,39 +99,18 @@ const loginBody = () => {
           onFocus={() => setPasswordFocus(true)}
           onBlur={() => setPasswordFocus(false)}
         />
-
-        <p
-          id='uidnote'
-          className={
-            passwordFocus && !validPassword ? 'instructions' : 'offscreen'
-          }
-        >
-          <FontAwesomeIcon icon={faInfoCircle} />
-          8 to 24 characters.
-          <br />
-          Must include uppercase and lowercase letters, a number and a special
-          character.
-          <br />
-          Allowed special characters:{' '}
-          <span aria-label='exclamation mark'>!</span>{' '}
-          <span aria-label='at symbol'>@</span>{' '}
-          <span aria-label='hashtag'>#</span>{' '}
-          <span aria-label='dollar sign'>$</span>{' '}
-          <span aria-label='percent'>%</span>
-        </p>
-
         <button disabled={!validName || !validPassword ? true : false}>
-          Sign Up
+          Sign in
         </button>
       </form>
       <p>
-        Already registered? <br />
+        Need to register? <br />
         <span>
-          <a href='#'>Sign in</a>
+          <a href='#'>Sign up</a>
         </span>
       </p>
     </div>
   );
 };
 
-export default loginBody;
+export default Login;
