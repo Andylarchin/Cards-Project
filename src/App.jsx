@@ -5,6 +5,7 @@ import Card from './components/Card/Card';
 import LoginBody from './components/LoginForm/loginBody';
 import Login from './components/actualLoginForm/login';
 import AdminPage from './components/adminPage/AdminPage';
+import { Routes, Route } from 'react-router-dom';
 
 const queryClient = new QueryClient();
 
@@ -56,18 +57,24 @@ function App() {
   if (!commentData || commentData.length === 0) return <p>No data available</p>;
 
   return (
-    <>
-      {/* <div class='bg'>
-        <Card
-          PostsData={PostsData}
-          UserData={UserData}
-          commentData={commentData}
+    <div className='bg'>
+      <Routes>
+        <Route
+          exact
+          path='/'
+          element={
+            <Card
+              PostsData={PostsData}
+              UserData={UserData}
+              commentData={commentData}
+            />
+          }
         />
-      </div> */}
-      {/* <LoginBody /> */}
-      {/* <AdminPage /> */}
-      <Login />
-    </>
+        <Route path='/register' element={<LoginBody />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/admin' element={<AdminPage />} />
+      </Routes>
+    </div>
   );
 }
 
